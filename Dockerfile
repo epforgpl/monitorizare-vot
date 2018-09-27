@@ -14,7 +14,7 @@ RUN dotnet restore
 
 # Copy everything else and build
 COPY private-api/app/. ./
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o ./out
 
 # test application -- see: dotnet-docker-unit-testing.md
 FROM build-env AS testrunner
@@ -25,6 +25,5 @@ ENTRYPOINT ["dotnet", "test", "--logger:trx"]
 # Build runtime image
 FROM microsoft/dotnet:2.1-aspnetcore-runtime
 WORKDIR /
-# COPY --from=build-env /app/out/ .
 COPY --from=build-env /app/src/VotingIrregularities.Api/out/ .
 ENTRYPOINT ["dotnet", "VotingIrregularities.Api.dll"]
