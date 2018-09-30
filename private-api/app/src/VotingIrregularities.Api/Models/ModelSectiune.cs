@@ -25,7 +25,7 @@ namespace VotingIrregularities.Api.Models
                 .ForMember(dest => dest.RaspunsuriDisponibile, c => c.MapFrom(src => src.OptionsToQuestions))
                 .ForMember(dest => dest.IdIntrebare, c => c.MapFrom(src => src.Id))
                 .ForMember(dest => dest.TextIntrebare, c => c.MapFrom(src => src.Text))
-                // .ForMember(dest => dest.IdTipIntrebare, c => c.MapFrom(src => src.Hint)) // TODO there id(int) on one side and string on the other
+                .ForMember(dest => dest.IdTipIntrebare, c => c.MapFrom(src => (int) src.QuestionType))
                 .ForMember(dest => dest.CodIntrebare, c => c.MapFrom(src => src.Code));
 
             CreateMap<OptionToQuestion, ModelRaspunsDisponibil>()
