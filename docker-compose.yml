@@ -1,0 +1,10 @@
+version: '2'
+services:
+  mv-api:
+    build: .
+    image: mv-api
+    ports:
+      - 8080:80
+    container_name: mv-api
+    restart: always
+    env_file: .env.docker

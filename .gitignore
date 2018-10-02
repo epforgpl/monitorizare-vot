@@ -256,3 +256,5 @@ ModelManifest.xml
 /private-api/app/test/VotingIrregularities.Tests/conturi.txt
 /private-api/app/test/VotingIrregularities.Tests/conturi-cu-parole.txt
 /.vscode
+
+.env.docker

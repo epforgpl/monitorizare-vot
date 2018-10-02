@@ -1,10 +1,10 @@
 {
-  "SecretKey": "SuperSecretKetyTBRSuperSecretKetyTBRSuperSecretKetyTBRSuperSecretKetyTBRSuperSecretKetyTBRSuperSecretKetyTBRSuperSecretKetyTBRSuperSecretKetyTBR",
+  "SecretKey": "${SECRET_KEY}",
   "ApplicationInsights": {
     "InstrumentationKey": "TBR"
   },
   "ConnectionStrings": {
-    "DefaultConnection": "TBR"
+    "DefaultConnection": "${DB_CONNECTION}"
   },
   "Logging": {
     "IncludeScopes": false,
@@ -16,7 +16,7 @@
   },
   "ApplicationCacheOptions": {
     "Enabled": false,
-    "Implementation": "RedisCache" // MemoryDistributedCache or RedisCache
+    "Implementation": "${CACHE_IMPLEMENTATION}"
   },
   "RedisCacheOptions": {
     "Configuration": "TBR",
@@ -27,12 +27,12 @@
     "Audience": "http://localhost:53413/"
   },
     "BlobStorageOptions": {
-        "Container": "TBR",
-        "AccountName": "TBR",
-        "AccountKey": "TBR"
+        "Container": "${BLOB_CONTAINER}",
+        "AccountName": "${BLOB_ACCOUNT_NAME}",
+        "AccountKey": "${BLOB_ACCOUNT_KEY}"
     },
     "HashOptions": {
-        "Salt": "TBR"
+        "Salt": "${HASH_SALT}"
     },
   
   // CACHE KEY VALABILITY

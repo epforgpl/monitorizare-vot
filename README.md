@@ -52,6 +52,18 @@ private-api\app\VotingIrregularities.Domain> dotnet run
 
 ## Deployment
 
+### Docker
+
+1. Copy `.env.docker.template` to `.env.docker` and set configuration settings
+
+2. Run docker
+   ```
+   docker-compose build
+   docker-compose up
+   ```
+
+### Manual
+
 1. install .NetCore (Open Source/Free/Multiplatform) from [here](https://www.microsoft.com/net/core#windows)
 
 2. run the following console command form the `app` folder:

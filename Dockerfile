@@ -26,4 +26,15 @@ ENTRYPOINT ["dotnet", "test", "--logger:trx"]
 FROM microsoft/dotnet:2.1-aspnetcore-runtime
 WORKDIR /
 COPY --from=build-env /app/src/VotingIrregularities.Api/out/ .
-ENTRYPOINT ["dotnet", "VotingIrregularities.Api.dll"]
+# Copy appsettings - Because in /out there is one truncated by publish
+COPY --from=build-env /app/src/VotingIrregularities.Api/appsettings.json.template ./
+
+
+RUN apt-get update && \
+      apt-get install -y gettext \
+      && rm -rf /var/lib/apt/lists/* \
+      && apt-get clean -y
+
+COPY run.sh /
+RUN chmod +x run.sh
+CMD ["./run.sh"]
