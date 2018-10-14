@@ -12,11 +12,17 @@ namespace VotingIrregularities.Api.Services
         public HashService(IOptions<HashOptions> options)
         {
             Salt = options.Value.Salt;
+            Enabled = options.Value.HashPins;
         }
 
         public string Salt { get; set; }
+        public bool Enabled { get; set; }
         public string GetHash(string clearString)
         {
+            if (!Enabled) {
+                return clearString;
+            }
+
             // SHA512 is disposable by inheritance.  
             using (var sha256 = SHA256.Create())
             {

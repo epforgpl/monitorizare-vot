@@ -32,7 +32,9 @@
         "AccountKey": "${BLOB_ACCOUNT_KEY}"
     },
     "HashOptions": {
-        "Salt": "${HASH_SALT}"
+        "Salt": "${HASH_SALT}",
+        // Ideally HashPins shoul be set to true in main file and docker wouldn't touch it #51
+        "HashPins": ${HASH_PINS}
     },
   
   // CACHE KEY VALABILITY
