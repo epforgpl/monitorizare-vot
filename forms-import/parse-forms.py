@@ -40,7 +40,8 @@ TYPES = {
     'Multiple': 0,
     'Single': 1,
     'Number': 2,
-    'Time': 2
+    'Time': 2,
+    'Text': 2,
 }
 
 form_section_id = -1
@@ -53,6 +54,8 @@ for sheet_name in wb.sheetnames:
             s = wb[sheet_name]
             for form in s.iter_rows(max_col=2):
                 form_code, version = [v.value for v in form]
+                if form_code is None:
+                    continue
                 form_versions[form_code.strip()] = version
 
         continue
@@ -82,7 +85,10 @@ for sheet_name in wb.sheetnames:
         if question is None:
             continue
 
-        question_type = TYPES[field_type]
+        try:
+            question_type = TYPES[field_type]
+        except KeyError:
+            raise KeyError("Missing question type in form {}, question: {}".format(form_id, question))
 
         question_id += 1
         q_num += 1
