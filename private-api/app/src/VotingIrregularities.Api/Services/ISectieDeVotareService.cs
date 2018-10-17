@@ -8,6 +8,5 @@ namespace VotingIrregularities.Api.Services
     public interface ISectieDeVotareService
     {
         Task<int> GetSingleSectieDeVotare(string codJudet, int numarSectie);
-        Task<int> GetSingleSectieDeVotare(int idJudet, int numarSectie);
     }
 }

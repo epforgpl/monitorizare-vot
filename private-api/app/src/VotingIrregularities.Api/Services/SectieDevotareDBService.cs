@@ -21,52 +21,27 @@ namespace VotingIrregularities.Api.Services
 
         public async Task<int> GetSingleSectieDeVotare(string codJudet, int numarSectie)
         {
-            try
-            {
-                JudetEnum judet;
-                var j = Enum.TryParse(codJudet, true, out judet);
+            var idSectie = await
+            _context.PollingStations
+                .Join(_context.Counties,
+                    station => station.IdCounty,
+                    county => county.Id,
+                    (station, county) => new { station = station, county = county })
+                .Where(
+                    a =>
+                        a.county.Code == codJudet &&
+                        a.station.Number == numarSectie)
+                .Select(a => a.station.Id)
+                .ToListAsync();
 
-                if (!j)
-                    throw new ArgumentException($"County inexistent: {codJudet}");
-
-                return await GetSingleSectieDeVotare((int)judet, numarSectie);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(new EventId(), ex.Message);
-            }
-
-            return -1;
-        }
-
-        public async Task<int> GetSingleSectieDeVotare(int idJudet, int numarSectie)
-        {
-            try
-            {
-                var idSectie = await
-                _context.PollingStations
-                    .Where(
-                        a =>
-                            a.IdCounty == idJudet &&
-                            a.Number == numarSectie)
-                    .Select(a => a.Id)
-                    .ToListAsync();
-
-                if (idSectie.Count == 0)
-                    throw new ArgumentException($"Sectie inexistenta pentru: {new { idJudet, numarSectie }}");
+            if (idSectie.Count == 0)
+                throw new ArgumentException($"Sectie inexistenta pentru: {new { codJudet, numarSectie }}");
 
 
-                if (idSectie.Count > 1)
-                    throw new ArgumentException($"S-au gasit mai multe sectii pentru: {new { idJudet, idSectie }}");
+            if (idSectie.Count > 1)
+                throw new ArgumentException($"S-au gasit mai multe sectii pentru: {new { codJudet, idSectie }}");
 
-                return idSectie.Single();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(new EventId(), ex.Message);
-            }
-
-            return -1;
+            return idSectie.Single();
         }
     }
 }
