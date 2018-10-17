@@ -19,7 +19,10 @@ out = open(fout, 'w', buffering=1)
 wb = load_workbook(fin)  # type: Workbook # guess_types?
 
 out.write("DELETE FROM FormVersions;\n")
+out.write("DELETE FROM Answers;\n")
 out.write("DELETE FROM OptionsToQuestions;\n")
+out.write("DELETE FROM Notes;\n")
+out.write("DELETE FROM PollingStationInfos;\n")
 out.write("DELETE FROM Questions;\n")
 out.write("DELETE FROM Options;\n")
 out.write("DELETE FROM FormSections;\n")
@@ -35,7 +38,7 @@ out.write("INSERT INTO Options (Id, IsFreeText, Text, Hint) "
 # Text for number/time: Click and enter answer; until
 FREE_OPTION_ID = option_id
 
-question_id = -1
+question_id = 0  # to start counting from 1
 TYPES = {
     'Multiple': 0,
     'Single': 1,
