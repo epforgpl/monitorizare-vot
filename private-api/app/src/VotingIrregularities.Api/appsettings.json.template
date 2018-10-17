@@ -34,7 +34,8 @@
     "HashOptions": {
         "Salt": "${HASH_SALT}",
         // Ideally HashPins shoul be set to true in main file and docker wouldn't touch it #51
-        "HashPins": ${HASH_PINS}
+        "HashPins": ${HASH_PINS},
+        "VerifyDeviceId": ${VERIFY_DEVICE_ID}
     },
   
   // CACHE KEY VALABILITY

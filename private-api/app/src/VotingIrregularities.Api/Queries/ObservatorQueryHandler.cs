@@ -23,7 +23,7 @@ namespace VotingIrregularities.Api.Queries
 
             var userinfo = await _context.Observers
                 .FirstOrDefaultAsync(a => a.Pin == hashValue &&
-                                     (string.IsNullOrWhiteSpace(a.MobileDeviceId) || a.MobileDeviceId == message.UDID) &&
+                                     (!_hash.VerifyDeviceId || string.IsNullOrWhiteSpace(a.MobileDeviceId) || a.MobileDeviceId == message.UDID) &&
                                      a.Phone == message.Phone);
             if (userinfo == null)
                 return new ModelObservatorInregistrat

@@ -13,10 +13,13 @@ namespace VotingIrregularities.Api.Services
         {
             Salt = options.Value.Salt;
             Enabled = options.Value.HashPins;
+            VerifyDeviceId = options.Value.VerifyDeviceId;
         }
 
         public string Salt { get; set; }
         public bool Enabled { get; set; }
+        public bool VerifyDeviceId { get; set; }
+
         public string GetHash(string clearString)
         {
             if (!Enabled) {

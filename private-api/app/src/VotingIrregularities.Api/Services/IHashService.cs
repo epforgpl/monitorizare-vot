@@ -4,5 +4,6 @@
     {
         string Salt { get; set; }
         string GetHash(string clearString);
+        bool VerifyDeviceId { get; set; }
     }
 }
