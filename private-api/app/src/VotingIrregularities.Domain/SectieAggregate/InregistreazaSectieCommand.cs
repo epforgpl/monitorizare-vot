@@ -24,11 +24,16 @@ namespace VotingIrregularities.Domain.SectieAggregate
         public RaspunsFormularProfile()
         {
             CreateMap<InregistreazaSectieCommand, PollingStationInfo>()
-                .ForMember(src => src.LastModified, c => c.MapFrom(src => DateTime.UtcNow));
+                .ForMember(dest => dest.IdObserver, c => c.MapFrom(src => src.IdObservator))
+                .ForMember(dest => dest.LastModified, c => c.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.UrbanArea, c => c.MapFrom(src => src.EsteZonaUrbana))
+                .ForMember(dest => dest.ObserverLeaveTime, c => c.MapFrom(src => src.OraPlecarii))
+                .ForMember(dest => dest.ObserverArrivalTime, c => c.MapFrom(src => src.OraSosirii))
+                .ForMember(dest => dest.IsPollingStationPresidentFemale, c => c.MapFrom(src => src.PresedinteBesvesteFemeie));
 
             CreateMap<ActualizeazaSectieCommand, PollingStationInfo>()
-                .ForMember(src => src.LastModified, c => c.MapFrom(src => DateTime.UtcNow))
-                .ForMember(src => src.ObserverLeaveTime, c => c.MapFrom(src => src.OraPlecarii));
+                .ForMember(dest => dest.LastModified, c => c.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.ObserverLeaveTime, c => c.MapFrom(src => src.OraPlecarii));
         }
     }
 }

@@ -46,7 +46,7 @@ namespace VotingIrregularities.Api.Controllers
             // daca nota este asociata sectiei
             int idSectie = await _mediator.Send(_mapper.Map<ModelSectieQuery>(nota));
             if (idSectie < 0)
-                return this.ResultAsync(HttpStatusCode.NotFound);
+                return this.ResultAsync(HttpStatusCode.NotFound); // TODO Not found what? add some context #60
 
             var command = _mapper.Map<AdaugaNotaCommand>(nota);
             var fileAddress = await _mediator.Send(new ModelFile { File = file });
@@ -59,7 +59,7 @@ namespace VotingIrregularities.Api.Controllers
             var result = await _mediator.Send(command);
 
             if (result < 0)
-                return this.ResultAsync(HttpStatusCode.NotFound);
+                return this.ResultAsync(HttpStatusCode.NotFound); // TODO Not found what? add some context #60
 
             return await Task.FromResult(new { FileAdress = fileAddress, nota = nota });
         }
