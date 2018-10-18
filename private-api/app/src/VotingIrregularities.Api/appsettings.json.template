@@ -29,7 +29,8 @@
     "BlobStorageOptions": {
         "Container": "${BLOB_CONTAINER}",
         "AccountName": "${BLOB_ACCOUNT_NAME}",
-        "AccountKey": "${BLOB_ACCOUNT_KEY}"
+        "AccountKey": "${BLOB_ACCOUNT_KEY}",
+        "UseHttps": ${BLOB_USE_HTTPS},
     },
     "HashOptions": {
         "Salt": "${HASH_SALT}",
