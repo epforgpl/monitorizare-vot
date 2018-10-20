@@ -41,6 +41,6 @@
   
   // CACHE KEY VALABILITY
   "DefaultCacheHours": 0,
-  "DefaultCacheMinutes": 30,
+  "DefaultCacheMinutes": 1,
   "DefaultCacheSeconds":  0
 }

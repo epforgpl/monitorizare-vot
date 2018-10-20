@@ -40,7 +40,7 @@ namespace VotingIrregularities.Api.Queries
         public async Task<IEnumerable<ModelSectiune>> Handle(ModelFormular.IntrebariQuery message)
         {
             CacheObjectsName formular;
-            Enum.TryParse("Formular" + message.CodFormular, out formular);
+            Enum.TryParse("Formular" + message.CodFormular, out formular); // TODO why enum here?
 
             return await _cacheService.GetOrSaveDataInCacheAsync<IEnumerable<ModelSectiune>>(formular,
                 async () =>
@@ -66,7 +66,7 @@ namespace VotingIrregularities.Api.Queries
                 },
                 new DistributedCacheEntryOptions
                 {
-                    AbsoluteExpirationRelativeToNow = new TimeSpan(message.CacheHours, message.CacheMinutes, message.CacheMinutes)
+                    AbsoluteExpirationRelativeToNow = new TimeSpan(message.CacheHours, message.CacheMinutes, message.CacheMinutes) // TODO CacheSeconds should be last?
                 });
         }
     }
