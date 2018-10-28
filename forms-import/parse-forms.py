@@ -81,8 +81,8 @@ for sheet_name in wb.sheetnames:
               .format(form_section_id, form_section_id))
 
     q_num = 0
-    for q in s.iter_rows(min_row=2, max_col=6):
-        question, field_type, values, alarm_values, more_option, more_hint = [v.value.strip() if v.value else v.value for v in q]
+    for q in s.iter_rows(min_row=2, max_col=7):
+        code, question, field_type, values, alarm_values, more_option, more_hint = [v.value.strip() if v.value else v.value for v in q]
         hint = ''  # TODO what is it?
 
         if question is None:
@@ -97,7 +97,7 @@ for sheet_name in wb.sheetnames:
         q_num += 1
         out.write("\nINSERT INTO Questions (Id, FormCode, Code, IdSection, QuestionType, Text, Hint) "
                   + "VALUES ({}, '{}', '{}', {}, {}, '{}', '{}');\n"
-                  .format(question_id, form_id, "{}.{:02d}".format(form_id, q_num), form_section_id, question_type, question.replace("'", "\\'"), hint))
+                  .format(question_id, form_id, code, form_section_id, question_type, question.replace("'", "\\'"), hint))
 
         if values:
             values = [v.strip() for v in values.lower().split('/')]
